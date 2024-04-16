@@ -1,0 +1,19 @@
+{
+    "name": "data-visualization-dashboard",
+    "version": "1.0.0",
+    "description": "This is the project that provides the ability to get  and visualizate the data of JSON Api",
+    "scripts": {
+        "serve": "webpack serve"
+    },
+    "devDependencies": {
+      "mini-css-extract-plugin": "^2.8.1",
+      "webpack": "^5.91.0",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^5.0.4"
+    },
+    "dependencies": {
+      "css-loader": "^6.10.0",
+      "html-webpack-plugin": "^5.6.0",
+      "style-loader": "^3.3.4"
+    }
+}
