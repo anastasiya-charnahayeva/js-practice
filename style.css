@@ -1,4 +1,15 @@
 * {
-    color: gray;
-    font-size: 15px;
+    color: rgb(45, 40, 40);
 }
+h1, h2 {
+  text-align: center;
+}
+select#selectUsers {
+    width: 400px;
+    border: 3px solid;                
+    font-size: 16px;
+}
+.selector {
+    margin: auto;
+    text-align: center;
+} 

@@ -4,13 +4,132 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=devixe-width, initial-scale=1.0">
-        <title>Data visualization dashboard</title>        
-        <link rel="stylesheet" href="./style.css"/>
+        <!-- <style>
+            * {
+                color: rgb(45, 40, 40);
+            }
+            h1, h2 {
+              text-align: center;
+            }
+            select#selectUsers {
+                width: 400px;
+                border: 3px solid;                
+                font-size: 16px;
+            }
+            .selector {
+                margin: auto;
+                text-align: center;
+            }    
+        </style> -->
+        <title>Data visualization dashboard</title>
+        <link rel="stylesheet" href="./style.css">      
     </head>
     <body id="main">  
-        <script src="./index.js"> </script> 
-        <select name="users" id="selectUsers">
-            <option value="all" selected>---Statistic for all users---</option>
-        </select>
-    </body>
+       
+        <div class="selector">
+            <select id="selectUsers" multiselect size="3">
+                <option disabled>---Statistic for all users---</option>
+            </select>
+        </div>
+       
+
+
+        <div id='chartArea'>
+          <h1>Charts with data</h1>
+          <h2 id='barTitle'></h2>
+          <svg  id='svgBar' viewbox='0 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+          </svg>
+          <h2 id='lineTitle'></h2>
+          <svg  id='svgLine' viewbox='0 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+          </svg>
+          <h2 id='pieTitle'></h2>
+          <svg  id='svgPie' viewbox='0 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+          </svg>
+         
+          <h1>Update Plot Data</h1>
+          <div class='dataUpdate'>
+              <!-- header for quarterly data input-->
+              <div class="row quarterly_titles">
+                  <div class="col-sm data">
+                  </div>
+                  <p class="col-sm header">Color</p>
+                  <p class="col-sm header">Q1</p>
+                  <p class="col-sm header">Q2</p>
+                  <p class="col-sm header">Q3</p>
+                  <p class="col-sm header">Q4</p>
+              </div>
+             
+              <!-- data1 row-->
+              <div class="row quarterly_titles">
+                  <div class="col-sm header">
+                      <p>Data 1</p>
+                  </div>
+                  <div class="col-sm">
+                      <input type="color" class="form-control data" id='color1' value='#b22222'>
+                  </div>
+                  <div class="col-sm">
+                      <input type="number" class="form-control data" id="data1_q1" min=0 max=100 value="10" />
+                  </div>
+                  <div class="col-sm">
+                      <input type="number" class="form-control data" id="data1_q2" min=0 max=100 value="45" />
+                  </div>
+                  <div class="col-sm">
+                      <input type="number" class="form-control data" id="data1_q3" min=0 max=100 value="20" />
+                  </div>
+                  <div class="col-sm">
+                      <input type="number" class="form-control data" id="data1_q4" min=0 max=100 value='75' />
+                  </div>
+              </div>
+             
+              <!-- data2 row-->
+              <div class="row quarterly_titles" id="">
+                  <div class="col-sm header">
+                      <p>Data 2</p>
+                  </div>
+                  <div class="col-sm">
+                  <input type="color" id='color2' class="form-control data"  value='#4682b4'>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data2_q1" min=0 max=100 value="100" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data2_q2" min=0 max=100 value="80" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data2_q3" min=0 max=100 value="40" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data2_q4" min=0 max=100 value="65" />
+                </div>
+            </div>
+           
+            <!-- data3 row-->
+            <div class="row quarterly_titles" id="">
+                <div class="col-sm header">
+                    <p>Data 3</p>
+                </div>
+                <div class="col-sm">
+                  <input type="color" id='color3' class="form-control data" value='#2e8b57'>
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data3_q1" min=0 max=100 value="75" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data3_q2" min=0 max=100 value="40" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data3_q3" min=0 max=100 value="65" />
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control data" id="data3_q4" min=0 max=100 value="20" />
+                </div>
+            </div>
+            <button type="button" class="btn btn-link" onclick="updateData('bar')">Bar Chart</button><button type="button" class="btn btn-link" onclick="updateData('line')">Line Chart</button><button type="button" class="btn btn-link" onclick="updateData('pie0')">Pie Chart</button>
+            <!-- dataUpdate div -->
+                </div>
+          <p id='dataFooter'>*Enter numbers from 0 - 100</p>
+  </div>
+
+
+</body>
 </html>
