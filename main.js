@@ -20,8 +20,8 @@ const months = [
 
 
 
-const getUsers = async () => {
-   const res = await fetch('https://jsonplaceholder.typicode.com/users')
+const getUsers = () => {
+   const res = fetch('https://jsonplaceholder.typicode.com/users')
    .then((response) => response.json())
    .then((json) => {
        let divChecks = document.getElementById('selectUsers');
@@ -30,7 +30,7 @@ const getUsers = async () => {
                option.setAttribute('key', user.id);
                option.setAttribute('value', user.id);
                divChecks.appendChild(option);
-               option.innerText = `${user.name}`;
+               option.innerText = user.name;
        })
        selectedUsers = json.map(e => e.id);
        return json;
@@ -68,7 +68,7 @@ const getComments = async () => {
 
 
 // viewport height
-let v_height = 400;
+const v_height = 400;
 
 
 
@@ -93,8 +93,6 @@ function createLabel(node, text) {
  
        label.setAttribute("x", yAxis_x);
        label.setAttribute("y", value);
- 
-       // label.classList.add("label y-labels");
  
        label.innerHTML = values_y[idx] ;
  
@@ -129,14 +127,15 @@ function createLabel(node, text) {
 
 function createAxis(node) {
    // draw y axis
+   const stylePolyline = 'stroke: black; stroke-width: 2';
    let polyline_y = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
    polyline_y.setAttribute('points', '100,50 100,350');
-   polyline_y.setAttribute('style', 'stroke: black; stroke-width: 2');
+   polyline_y.setAttribute('style', stylePolyline);
    node.appendChild(polyline_y);
    // draw x axis
    let polyline_x = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
    polyline_x.setAttribute('points', '100,350 700,350');
-   polyline_x.setAttribute('style', 'stroke: black; stroke_width: 2');
+   polyline_x.setAttribute('style', stylePolyline);
    node.appendChild(polyline_x);
 }
 
@@ -177,11 +176,12 @@ function drawLine() {
    resetNode(svgElement);
    createLabel(svgElement, months);
    createAxis(svgElement);
+   const x_axis_step = 60;
    let x_coor = 130;
    let sortedComments = monthlyCommentTrend.map(el => el.amountComments);
    let arrData = sortedComments.map((e) => {
     let response = [x_coor,  e + 35 ];
-    x_coor += 60;
+    x_coor += x_axis_step;
     return response;
    });
    let line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
@@ -195,7 +195,7 @@ function drawLine() {
 
 function makeSVG(tag, attrs) {
     let el= document.createElementNS('http://www.w3.org/2000/svg', tag);
-    for (var k in attrs)
+    for (let k in attrs)
         if (attrs.hasOwnProperty(k)) el.setAttribute(k, attrs[k]);
     return el;
 }
@@ -207,9 +207,8 @@ function drawPie() {
     resetNode(svgElement);
     let color = percentagePostsPerUser.map(() => generateRandomColor());
     if (percentagePostsPerUser.length > 1) {
-        let total = percentagePostsPerUser.reduce(function (accu, that) { return that + accu; }, 0);
+        let total = percentagePostsPerUser.reduce(((accu, that) => that + accu), 0);
         let sectorAngleArr = percentagePostsPerUser.map(function (v) { return 360 * v / total; });
-   
         let startAngle = 0;
         let endAngle = 0;
         for (let i=0; i<sectorAngleArr.length; i++){
@@ -229,8 +228,6 @@ function drawPie() {
             let arc = makeSVG("path", {d: d, fill: color[i]});
             svgElement.appendChild(arc);
         }
-
-
     } else {
         let strokeWidth = 200;
         let rotate = 0;
@@ -252,8 +249,7 @@ function drawPie() {
         xPosition + "px " + yPosition + "px"
         );
         circ.setAttribute("transform", "rotate(" + rotate + ")");
-        svgElement.appendChild(circ);
-       
+        svgElement.appendChild(circ);  
     }
 }
 
@@ -295,9 +291,6 @@ const updateAll = async () => {
                }
            }
 
-
-
-
        })
        updateData();
    })
@@ -307,7 +300,7 @@ const updateAll = async () => {
 
    const getPostPerUser = () => {
        let postAm = [];
-       let filteredUsers = selectedUsers.length !== users.length ? users.filter(user => selectedUsers.includes(user.id.toString())) : users;
+       let filteredUsers = users.filter(user => selectedUsers.includes(user.id.toString()));
        for (let i = 0; i < filteredUsers.length; i++) {
            const postsUpdated = posts.filter(post => filteredUsers[i].id == post.userId);
            postAm.push({user: filteredUsers[i].name, amount: postsUpdated.length, userId: filteredUsers[i].id});
@@ -367,17 +360,4 @@ const updateAll = async () => {
    updateData();
 }
 
-
-
-
 updateAll();
-
-
-
-
-
-
-
-
-
-
