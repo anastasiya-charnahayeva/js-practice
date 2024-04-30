@@ -1,16 +1,51 @@
+
+
 <!DOCTYPE html>
 <html lanf="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=devixe-width, initial-scale=1.0">
-        <title>Data visualization dashboard</title>        
-        <link rel="stylesheet" href="./style.css"/>
-    </head>
-    <body id="main">  
-        <script src="./index.js"> </script> 
-        <select name="users" id="selectUsers">
-            <option value="all" selected>---Statistic for all users---</option>
-        </select>
-    </body>
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=devixe-width, initial-scale=1.0">
+       <style>
+           * {
+               color: rgb(45, 40, 40);
+           }
+           .header {
+             text-align: center;
+           }
+           select#selectUsers {
+               width: 400px;
+               border: 3px solid;              
+               font-size: 16px;
+           }
+           .selector {
+               margin: auto;
+               text-align: center;
+           }  
+       </style>
+       <title>Data visualization dashboard</title>
+       <link rel="stylesheet" href="./style.css">    
+   </head>
+   <body id="main">
+     
+       <div class="selector">
+           <select id="selectUsers" multiselect size="3">
+               <option disabled>---Statistic for all users---</option>
+           </select>
+       </div>
+
+
+       <div id='chartArea'>
+            <h1 class="header">Charts with data</h1>
+            <h2 id='barTitle' class="header"></h2>
+            <svg  id='svgBar' viewbox='0 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+            </svg>
+            <h2 id='lineTitle'></h2>
+            <svg  id='svgLine' viewbox='0 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+            </svg>
+            <h2 id='pieTitle'></h2>
+            <svg  id='svgPie' viewbox='-200 0 800 400' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+            </svg>
+       </div>
+</body>
 </html>
