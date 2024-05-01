@@ -300,7 +300,7 @@ const updateAll = async () => {
 
    const getPostPerUser = () => {
        let postAm = [];
-       let filteredUsers = users.filter(user => selectedUsers.includes(user.id.toString()));
+       let filteredUsers = selectedUsers.length !== users.length ? users.filter(user => selectedUsers.includes(user.id.toString())) : users;
        for (let i = 0; i < filteredUsers.length; i++) {
            const postsUpdated = posts.filter(post => filteredUsers[i].id == post.userId);
            postAm.push({user: filteredUsers[i].name, amount: postsUpdated.length, userId: filteredUsers[i].id});
